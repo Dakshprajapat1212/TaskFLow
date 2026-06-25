@@ -22,6 +22,7 @@ const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null, initialS
   const [aiSuggestion, setAiSuggestion] = useState(null);
   const [aiSubtasksSuggestion, setAiSubtasksSuggestion] = useState(null);
   const [selectedAiSubtasks, setSelectedAiSubtasks] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { boards, createTask, updateTask, isLoading, error, clearError } = useBoardStore();
 
@@ -68,6 +69,8 @@ const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null, initialS
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     try {
       const taskData = {
         title,
@@ -91,6 +94,8 @@ const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null, initialS
       handleClose();
     } catch (err) {
       // Error handled in store
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -540,8 +545,8 @@ const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null, initialS
           <button type="button" onClick={handleClose} className="px-4 py-2 text-[13px] font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 rounded-md transition-colors dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-800">
             Cancel
           </button>
-          <button type="submit" form="task-form" disabled={isLoading || !title.trim()} className="px-6 py-2 bg-zinc-900 hover:bg-zinc-800 text-white text-[13px] font-medium rounded-md transition-colors disabled:opacity-50 flex items-center shadow-sm dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100">
-            {isLoading && <span className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2 dark:border-zinc-900/20 dark:border-t-zinc-900"></span>}
+          <button type="submit" form="task-form" disabled={isSubmitting || isLoading || !title.trim()} className="px-6 py-2 bg-zinc-900 hover:bg-zinc-800 text-white text-[13px] font-medium rounded-md transition-colors disabled:opacity-50 flex items-center shadow-sm dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100">
+            {(isSubmitting || isLoading) && <span className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2 dark:border-zinc-900/20 dark:border-t-zinc-900"></span>}
             {taskToEdit ? 'Save Changes' : 'Create Task'}
           </button>
         </div>
