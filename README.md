@@ -112,4 +112,41 @@ If you'd like to skip registration and test the live application immediately, yo
 - **Real-time Collaboration:** Currently, the app relies on REST API polling. In the future, integrating WebSockets (Socket.io) would allow multiple users to drag-and-drop on the same board simultaneously.
 
 ---
-*TaskFlow was engineered to showcase modern full-stack development, utilizing decoupled architecture and serverless optimization techniques.*
+*TaskFlow was engineered to showcase modern full-stack development, utilizing decoupled architecture and serverless optimization techniques.
+
+
+
+pictures-
+
+
+
+
+
+
+.*<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625213343" src="https://github.com/user-attachments/assets/4de03e59-a356-4dbb-ac4e-397db8599bc8" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194528" src="https://github.com/user-attachments/assets/2e6d11e3-5000-414f-a120-bfe5ca3e612a" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194504" src="https://github.com/user-attachments/assets/fe207fe2-4853-4cee-8fab-3663f1aaf3ec" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194456" src="https://github.com/user-attachments/assets/27eeab9c-9fa9-4616-a186-4e88c88e5043" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194444" src="https://github.com/user-attachments/assets/a43ccc8a-fe2a-4fe0-a98d-dceffcb8384d" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194436" src="https://github.com/user-attachments/assets/be0e2b37-8112-4bce-8cc8-0b15933149f0" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194424" src="https://github.com/user-attachments/assets/0a064960-1482-4ed3-a478-ac9163a0eefc" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194412" src="https://github.com/user-attachments/assets/de3d7b82-14c4-49cc-983b-7680e793eef5" />
+
+
+
+<img width="2922" height="1604" alt="iScreen Shoter - Microsoft Edge - 260625194344" src="https://github.com/user-attachments/assets/da151e77-bcd3-4332-bb94-0421c9c653a7" />
+<img width="2940" height="1606" alt="iScreen Shoter - Microsoft Edge - 260625194302" src="https://github.com/user-attachments/assets/d9c97591-5296-45d7-b8ff-76eb17accf19" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194202" src="https://github.com/user-attachments/assets/196699e3-01e2-4c38-ba14-3efa7b6e0748" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625194045" src="https://github.com/user-attachments/assets/8e6e40ac-2ddd-4cea-825f-ecd31fda9b12" />
+
+
+
+
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625193919" src="https://github.com/user-attachments/assets/cb5aea5b-378b-4c30-b4f0-d4d6f2805f86" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625193821" src="https://github.com/user-attachments/assets/21cc011d-c04b-4456-b4ae-749aa68ba172" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625193742" src="https://github.com/user-attachments/assets/7d8caaa5-c6b9-4f48-915c-808429dd7d24" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625193715" src="https://github.com/user-attachments/assets/d5e6c7ec-0ba1-49bd-ac0a-c50c35bbbce2" />
+<img width="2940" height="1618" alt="iScreen Shoter - Microsoft Edge - 260625193545" src="https://github.com/user-attachments/assets/623120c9-f9dd-4e94-b89d-bf2596f0a666" />
+<img width="2940" height="1618" alt="iScreen Shoter - 20260625194227110" src="https://github.com/user-attachments/assets/7bb5189b-c0a5-4312-95b9-33239495101d" />
+<img width="2940" height="1618" alt="iScreen Shoter - 20260625194140732" src="https://github.com/user-attachments/assets/991820d6-34e8-40f4-8e83-97388d5dbf6b" />
+
