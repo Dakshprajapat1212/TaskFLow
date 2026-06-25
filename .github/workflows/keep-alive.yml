@@ -12,15 +12,7 @@ jobs:
     steps:
       - name: Ping Render API
         run: |
-          # Replace this URL with your actual Render backend URL after deployment
-          # You can add this URL as an environment variable or repository secret
-          RENDER_URL=${{ secrets.RENDER_BACKEND_URL }}
-          
-          if [ -z "$RENDER_URL" ]; then
-            echo "RENDER_BACKEND_URL secret is not set. Please add it to your GitHub Repository Secrets."
-            echo "Example: https://your-backend-app.onrender.com/api/boards"
-            exit 1
-          fi
+          RENDER_URL="https://taskflow-1-gtye.onrender.com"
           
           echo "Pinging $RENDER_URL to prevent sleep..."
           curl -s -o /dev/null -w "%{http_code}" "$RENDER_URL"
