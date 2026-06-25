@@ -35,6 +35,7 @@ const BoardDetails = () => {
   const [isAddingColumn, setIsAddingColumn] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
   const [createModalStatus, setCreateModalStatus] = useState('todo');
+  const [localTasks, setLocalTasks] = useState([]);
 
   const handleOpenCreateModal = (statusId = 'todo') => {
     setCreateModalStatus(statusId);
@@ -48,6 +49,10 @@ const BoardDetails = () => {
     fetchTasks(id);
     return () => clearError();
   }, [id, fetchTasks, clearError]);
+
+  useEffect(() => {
+    setLocalTasks(tasks);
+  }, [tasks]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -71,8 +76,49 @@ const BoardDetails = () => {
   };
 
   const handleDragOver = (event) => {
-    // We only perform the API actions on handleDragEnd to avoid spamming the backend
-    // and causing jumping UI during drag.
+    const { active, over } = event;
+    if (!over) return;
+    
+    const activeId = active.id;
+    const overId = over.id;
+    if (activeId === overId) return;
+
+    setLocalTasks((prevTasks) => {
+      const activeTaskIndex = prevTasks.findIndex((t) => t._id === activeId);
+      if (activeTaskIndex === -1) return prevTasks;
+      const activeTask = prevTasks[activeTaskIndex];
+
+      const isOverColumn = activeColumns.some((col) => col.id === overId);
+      if (isOverColumn) {
+        if (activeTask.status !== overId) {
+          const nextTasks = [...prevTasks];
+          nextTasks[activeTaskIndex] = { ...activeTask, status: overId };
+          return nextTasks;
+        }
+        return prevTasks;
+      }
+
+      const overTaskIndex = prevTasks.findIndex((t) => t._id === overId);
+      if (overTaskIndex !== -1) {
+        const overTask = prevTasks[overTaskIndex];
+        if (activeTask.status !== overTask.status) {
+          const nextTasks = [...prevTasks];
+          nextTasks[activeTaskIndex] = { ...activeTask, status: overTask.status };
+          
+          // Move item to the over index
+          const item = nextTasks.splice(activeTaskIndex, 1)[0];
+          nextTasks.splice(overTaskIndex, 0, item);
+          return nextTasks;
+        } else {
+          // Same column reordering during drag over for smoother visual
+          const nextTasks = [...prevTasks];
+          const item = nextTasks.splice(activeTaskIndex, 1)[0];
+          nextTasks.splice(overTaskIndex, 0, item);
+          return nextTasks;
+        }
+      }
+      return prevTasks;
+    });
   };
 
   const handleDragEnd = (event) => {
@@ -243,7 +289,7 @@ const BoardDetails = () => {
             onDragEnd={handleDragEnd}
           >
             {activeColumns.map((col) => {
-              const columnTasks = tasks
+              const columnTasks = localTasks
                 .filter((t) => t.status === col.id)
                 .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
 
