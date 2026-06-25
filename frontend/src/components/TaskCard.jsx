@@ -41,25 +41,16 @@ const TaskCard = ({ task, onClick, isOverlay }) => {
     <div
       ref={setNodeRef}
       style={style}
-      title="Click to view details"
+      {...attributes}
+      {...listeners}
+      title="Drag to move, click to view details"
       className={`group relative flex flex-col bg-white dark:bg-[#09090b] border ${
         isDragging 
           ? 'opacity-50 ring-2 ring-blue-500/50 border-transparent shadow-vercel-lg' 
           : 'border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-vercel-sm hover:shadow-linear-hover'
-      } rounded-xl p-4 cursor-pointer transition-all duration-200 ease-out`}
+      } rounded-xl p-4 cursor-grab active:cursor-grabbing transition-all duration-200 ease-out`}
       onClick={onClick}
     >
-      {/* Drag Handle (visible on hover) */}
-      <div 
-        {...attributes} 
-        {...listeners}
-        title="Drag to move task"
-        className="absolute left-1.5 top-1/2 -translate-y-1/2 p-1 text-zinc-300 opacity-30 group-hover:opacity-100 hover:text-zinc-600 dark:text-zinc-700 dark:hover:text-zinc-400 cursor-grab active:cursor-grabbing transition-opacity"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <GripVertical className="w-3.5 h-3.5" />
-      </div>
-
       <div className="flex flex-col gap-2.5">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-start gap-2 min-w-0">

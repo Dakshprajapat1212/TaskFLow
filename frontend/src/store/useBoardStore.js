@@ -226,7 +226,18 @@ export const useBoardStore = create((set, get) => ({
   updateTaskStatus: async (id, newStatus) => {
     const task = get().tasks.find((t) => t._id === id);
     if (!task) return;
-    return get().updateTask(id, { status: newStatus });
+    
+    // Good Logic: Auto-update subtasks based on parent drop
+    let updatedSubtasks = task.subtasks;
+    if (task.subtasks?.length > 0) {
+      if (newStatus === 'done') {
+        updatedSubtasks = task.subtasks.map(st => ({ ...st, status: 'done', completed: true }));
+      } else if (newStatus === 'todo') {
+        updatedSubtasks = task.subtasks.map(st => ({ ...st, status: 'todo', completed: false }));
+      }
+    }
+    
+    return get().updateTask(id, { status: newStatus, subtasks: updatedSubtasks });
   },
 
   reorderTask: async (activeId, overId) => {
