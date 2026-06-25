@@ -79,9 +79,10 @@ If you'd like to skip registration and test the live application immediately, yo
 2. **Create a Board:** Click "New Project" to start a new board.
 3. **Customize Columns:** Click the "Add Column" button on the far right of your board to create custom workflow stages.
 4. **Create Tasks:** Click "New Issue" to add a task. 
-5. **Use AI:** In the task creation modal, type naturally in the "Ask AI" box, or use the "AI Assistant" sidebar to auto-generate subtasks and estimates.
-6. **Drag and Drop:** Grab anywhere on a task card and effortlessly drag it to a new column. 
-7. **Complete Subtasks:** Clicking a subtask directly from the board will cycle its state. Dragging the parent card to the final "Done" column will complete them all automatically!
+5. **Manage Tasks:** Click any task to open its details. From there, you can edit its properties, add comments, or delete the task entirely using the red Delete button.
+6. **Use AI:** In the task creation modal, type naturally in the "Ask AI" box, or use the "AI Assistant" sidebar to auto-generate subtasks and estimates.
+7. **Drag and Drop:** Grab anywhere on a task card and effortlessly drag it to a new column. 
+8. **Complete Subtasks:** Clicking a subtask directly from the board will cycle its state. Dragging the parent card to the final "Done" column will complete them all automatically!
 
 ## 🔌 API Documentation
 

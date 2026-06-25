@@ -1,4 +1,4 @@
-import { X, CalendarDays, Clock, User, MessageSquare, Activity, CheckSquare, Send } from 'lucide-react';
+import { X, CalendarDays, Clock, User, MessageSquare, Activity, CheckSquare, Send, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { useState } from 'react';
 import SubtaskItem from './SubtaskItem';
@@ -8,7 +8,14 @@ import { useBoardStore } from '../store/useBoardStore';
 
 const TaskDetailDrawer = ({ task, onClose, onEdit }) => {
   const [comment, setComment] = useState('');
-  const { activities, updateTask, toggleSubtaskComplete } = useBoardStore();
+  const { activities, updateTask, toggleSubtaskComplete, deleteTask } = useBoardStore();
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      await deleteTask(task._id);
+      onClose();
+    }
+  };
 
   if (!task) return null;
 
@@ -194,19 +201,28 @@ const TaskDetailDrawer = ({ task, onClose, onEdit }) => {
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-zinc-200 flex justify-between dark:border-zinc-800 shrink-0 bg-white dark:bg-[#09090b]">
+        <div className="px-6 py-4 border-t border-zinc-200 flex justify-between items-center dark:border-zinc-800 shrink-0 bg-white dark:bg-[#09090b]">
           <button
-            onClick={onClose}
-            className="px-4 py-1.5 text-[13px] font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-transparent rounded-md transition-colors dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+            onClick={handleDelete}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium text-red-600 bg-red-50 hover:bg-red-100 rounded-md transition-colors dark:text-red-400 dark:bg-red-900/10 dark:hover:bg-red-900/20"
           >
-            Close
+            <Trash2 className="w-3.5 h-3.5" />
+            Delete
           </button>
-          <button
-            onClick={() => onEdit(task)}
-            className="px-5 py-1.5 text-[13px] font-medium text-zinc-900 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 rounded-md transition-colors dark:bg-zinc-800 dark:text-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-700"
-          >
-            Edit Task
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onClose}
+              className="px-4 py-1.5 text-[13px] font-medium text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100 border border-transparent rounded-md transition-colors dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100"
+            >
+              Close
+            </button>
+            <button
+              onClick={() => onEdit(task)}
+              className="px-5 py-1.5 text-[13px] font-medium text-zinc-900 bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 rounded-md transition-colors dark:bg-zinc-800 dark:text-zinc-100 dark:border-zinc-700 dark:hover:bg-zinc-700"
+            >
+              Edit Task
+            </button>
+          </div>
         </div>
       </div>
     </>
