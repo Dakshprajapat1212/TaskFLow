@@ -70,7 +70,12 @@ npm run dev
 
 ## 📖 How to Use TaskFlow
 
-1. **Sign Up / Log In:** Create an account to access your personal workspace.
+### 🧪 Test Credentials
+If you'd like to skip registration and test the live application immediately, you can use the following test account:
+- **Email:** `dakshprajapat1212@gmail.com`
+- **Password:** `daksh1212`
+
+1. **Sign Up / Log In:** Create an account or use the test credentials above to access your personal workspace.
 2. **Create a Board:** Click "New Project" to start a new board.
 3. **Customize Columns:** Click the "Add Column" button on the far right of your board to create custom workflow stages.
 4. **Create Tasks:** Click "New Issue" to add a task. 
