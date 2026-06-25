@@ -1,5 +1,8 @@
 # TaskFlow 🚀
 
+
+Note- check pictures of project in the end of readme
+
 TaskFlow is a powerful, AI-assisted Kanban project management tool built with the MERN stack. Designed for maximum productivity, it features a highly dynamic drag-and-drop interface, custom board columns, and intelligent AI integration to automate your workflow.
 
 ## ✨ Features
