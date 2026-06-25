@@ -16,6 +16,14 @@ export const COLUMNS = [
     dot: 'bg-blue-500',
   },
   {
+    id: 'review',
+    title: 'Review',
+    tone: 'purple',
+    accent: 'border-purple-200/80',
+    headerBg: 'bg-white/90 dark:bg-slate-900/90',
+    dot: 'bg-purple-500',
+  },
+  {
     id: 'done',
     title: 'Done',
     tone: 'emerald',
@@ -36,6 +44,7 @@ export const PRIORITY_CONFIG = {
 export const STATUS_CONFIG = {
   todo: { label: 'To Do', className: 'bg-slate-100 text-slate-600' },
   'in-progress': { label: 'In Progress', className: 'bg-blue-50 text-blue-700' },
+  review: { label: 'Review', className: 'bg-purple-50 text-purple-700' },
   done: { label: 'Done', className: 'bg-emerald-50 text-emerald-700' },
 };
 
@@ -53,7 +62,8 @@ export function getSubtaskStatus(st) {
 
 export function getNextSubtaskStatus(status) {
   if (status === 'todo') return 'in-progress';
-  if (status === 'in-progress') return 'done';
+  if (status === 'in-progress') return 'review';
+  if (status === 'review') return 'done';
   return 'in-progress';
 }
 
@@ -68,6 +78,7 @@ export function deriveParentStatus(subtasks) {
   if (!subtasks?.length) return null;
   const normalized = normalizeSubtasks(subtasks);
   if (normalized.every((st) => st.status === 'done')) return 'done';
+  if (normalized.some((st) => st.status === 'review')) return 'review';
   if (normalized.some((st) => st.status === 'in-progress')) return 'in-progress';
   return 'todo';
 }

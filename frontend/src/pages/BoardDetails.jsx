@@ -14,6 +14,7 @@ import { normalizeSubtasks } from '../utils/boardUtils';
 const COLUMNS = [
   { id: 'todo', title: 'To Do' },
   { id: 'in-progress', title: 'In Progress' },
+  { id: 'review', title: 'Review' },
   { id: 'done', title: 'Done' }
 ];
 
