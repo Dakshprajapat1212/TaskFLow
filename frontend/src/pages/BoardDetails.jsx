@@ -34,6 +34,12 @@ const BoardDetails = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [isAddingColumn, setIsAddingColumn] = useState(false);
   const [newColumnTitle, setNewColumnTitle] = useState('');
+  const [createModalStatus, setCreateModalStatus] = useState('todo');
+
+  const handleOpenCreateModal = (statusId = 'todo') => {
+    setCreateModalStatus(statusId);
+    setIsCreateModalOpen(true);
+  };
 
   const board = useMemo(() => boards.find((b) => b._id === id), [boards, id]);
   const activeColumns = board?.columns?.length > 0 ? board.columns : COLUMNS;
@@ -214,7 +220,7 @@ const BoardDetails = () => {
             </button>
           </div>
           <button
-            onClick={() => setIsCreateModalOpen(true)}
+            onClick={() => handleOpenCreateModal(activeColumns[0]?.id || 'todo')}
             className="flex items-center gap-1.5 bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:hover:bg-white text-white dark:text-zinc-900 px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors shadow-vercel-sm shrink-0"
           >
             <Plus className="w-4 h-4 stroke-[2]" />
@@ -247,6 +253,7 @@ const BoardDetails = () => {
                     column={col} 
                     tasks={columnTasks}
                     onCardClick={handleCardClick}
+                    onAddTask={() => handleOpenCreateModal(col.id)}
                   />
                 </div>
               );
@@ -298,6 +305,7 @@ const BoardDetails = () => {
         onClose={handleCloseModal} 
         boardId={id} 
         taskToEdit={taskToEdit}
+        initialStatus={createModalStatus}
       />
       
       <TaskDetailDrawer

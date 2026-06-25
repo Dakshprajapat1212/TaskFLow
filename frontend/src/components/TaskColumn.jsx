@@ -2,7 +2,7 @@ import { useDroppable } from '@dnd-kit/core';
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import TaskCard from './TaskCard';
 
-const TaskColumn = ({ column, tasks, onCardClick }) => {
+const TaskColumn = ({ column, tasks, onCardClick, onAddTask }) => {
   const { setNodeRef, isOver } = useDroppable({
     id: column.id,
   });
@@ -19,7 +19,7 @@ const TaskColumn = ({ column, tasks, onCardClick }) => {
             {tasks.length}
           </span>
         </div>
-        <button className="p-1 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-200/50 dark:hover:text-zinc-200 dark:hover:bg-zinc-800/50 rounded transition-colors">
+        <button onClick={onAddTask} className="p-1 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-200/50 dark:hover:text-zinc-200 dark:hover:bg-zinc-800/50 rounded transition-colors" title="Add Task">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
         </button>
       </div>
@@ -43,7 +43,9 @@ const TaskColumn = ({ column, tasks, onCardClick }) => {
           </SortableContext>
           
           {tasks.length === 0 && (
-            <div className={`h-32 border border-dashed rounded-xl flex flex-col items-center justify-center text-center p-4 transition-colors ${
+            <div 
+              onClick={onAddTask}
+              className={`h-32 border border-dashed rounded-xl flex flex-col items-center justify-center text-center p-4 transition-colors cursor-pointer ${
               isOver 
                 ? 'border-blue-400 dark:border-blue-500/50 bg-blue-50/50 dark:bg-blue-900/20' 
                 : 'border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/50 dark:bg-[#09090b]/50 group hover:bg-zinc-100/50 dark:hover:bg-zinc-900/50'

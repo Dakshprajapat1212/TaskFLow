@@ -3,7 +3,7 @@ import { X, Sparkles, Calendar, Clock, AlertCircle, CheckSquare, Tags, Wand2 } f
 import { useBoardStore } from '../store/useBoardStore';
 import api from '../utils/api';
 
-const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null }) => {
+const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null, initialStatus = 'todo' }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [status, setStatus] = useState('todo');
@@ -35,7 +35,7 @@ const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null }) => {
   const resetForm = () => {
     setTitle('');
     setDescription('');
-    setStatus('todo');
+    setStatus(initialStatus);
     setPriority('medium');
     setDueDate('');
     setEstimatedEffort('');
@@ -62,7 +62,7 @@ const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null }) => {
     } else {
       resetForm();
     }
-  }, [taskToEdit, isOpen]);
+  }, [taskToEdit, isOpen, initialStatus]);
 
   if (!isOpen) return null;
 
