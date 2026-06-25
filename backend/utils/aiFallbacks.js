@@ -58,10 +58,15 @@ function suggestSubtasksLocally(title, description = '') {
     return ['Define metrics', 'Design layout', 'Build data API', 'Implement charts', 'Add filters', 'Testing'];
   }
 
-  subtasks.push('Research & planning');
-  subtasks.push('Implementation');
-  subtasks.push('Testing & review');
-  if (text.includes('deploy') || text.includes('launch')) subtasks.push('Deployment');
+  // Make it dynamic based on the task title if no specific keywords match
+  const shortTitle = title.length > 30 ? title.substring(0, 27) + '...' : title;
+  
+  subtasks.push(`Outline requirements for: ${shortTitle}`);
+  subtasks.push(`Initial implementation of ${shortTitle}`);
+  subtasks.push(`Review and test ${shortTitle}`);
+  if (text.includes('deploy') || text.includes('launch') || text.includes('publish')) {
+    subtasks.push('Final deployment and launch');
+  }
   return subtasks;
 }
 
