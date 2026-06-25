@@ -200,10 +200,10 @@ const Register = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-3 rounded-lg transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30"
+              className="w-full bg-primary hover:bg-primary-hover text-white dark:text-zinc-900 font-semibold py-3 rounded-lg transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center space-x-2 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 dark:shadow-none"
             >
               {isLoading ? (
-                <span className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin"></span>
+                <span className="w-5 h-5 border-2 border-white/20 border-t-white dark:border-zinc-900/20 dark:border-t-zinc-900 rounded-full animate-spin"></span>
               ) : (
                 <>
                   <span>Create Account</span>
