@@ -1,8 +1,0 @@
-{
-  "name": "taskflow-monorepo",
-  "version": "1.0.0",
-  "description": "Root configuration for Vercel deployment",
-  "scripts": {
-    "vercel-build": "cd frontend && npm install && npm run build"
-  }
-}
