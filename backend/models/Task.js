@@ -5,7 +5,6 @@ const subtaskSchema = new mongoose.Schema(
     title: { type: String, required: true },
     status: {
       type: String,
-      enum: ['todo', 'in-progress', 'done'],
       default: 'todo',
     },
     completed: { type: Boolean, default: false },
@@ -26,7 +25,6 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['todo', 'in-progress', 'done'],
       default: 'todo',
     },
     priority: {

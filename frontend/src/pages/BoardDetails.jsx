@@ -23,7 +23,7 @@ const BoardDetails = () => {
   const navigate = useNavigate();
   const { 
     boards, tasks, fetchTasks, isLoading, error, clearError,
-    reorderTask, updateTaskStatus, undo
+    reorderTask, updateTaskStatus, undo, addColumn
   } = useBoardStore();
   const { toggleSidebar } = useUIStore();
 
@@ -32,8 +32,11 @@ const BoardDetails = () => {
   const [selectedTask, setSelectedTask] = useState(null);
   const [taskToEdit, setTaskToEdit] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isAddingColumn, setIsAddingColumn] = useState(false);
+  const [newColumnTitle, setNewColumnTitle] = useState('');
 
   const board = useMemo(() => boards.find((b) => b._id === id), [boards, id]);
+  const activeColumns = board?.columns?.length > 0 ? board.columns : COLUMNS;
 
   useEffect(() => {
     fetchTasks(id);
@@ -78,7 +81,7 @@ const BoardDetails = () => {
     
     if (!activeTask) return;
 
-    const isOverColumn = COLUMNS.some(col => col.id === overId);
+    const isOverColumn = activeColumns.some(col => col.id === overId);
     
     if (isOverColumn) {
       if (activeTask.status !== overId) {
@@ -112,6 +115,14 @@ const BoardDetails = () => {
   const handleCloseModal = () => {
     setIsCreateModalOpen(false);
     setTaskToEdit(null);
+  };
+
+  const handleAddColumn = async (e) => {
+    e.preventDefault();
+    if (!newColumnTitle.trim()) return;
+    await addColumn(board._id, newColumnTitle.trim());
+    setIsAddingColumn(false);
+    setNewColumnTitle('');
   };
 
   if (isLoading && tasks.length === 0) {
@@ -225,7 +236,7 @@ const BoardDetails = () => {
             onDragOver={handleDragOver}
             onDragEnd={handleDragEnd}
           >
-            {COLUMNS.map((col) => {
+            {activeColumns.map((col) => {
               const columnTasks = tasks
                 .filter((t) => t.status === col.id)
                 .sort((a, b) => (a.sortOrder || 0) - (b.sortOrder || 0));
@@ -251,10 +262,34 @@ const BoardDetails = () => {
           </DndContext>
 
           {/* Add Column Placeholder */}
-          <button className="w-[340px] shrink-0 flex items-center gap-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-200 px-3 py-2.5 rounded-lg border border-transparent transition-colors mt-0.5">
-            <Plus className="w-4 h-4 stroke-[2]" />
-            <span className="text-[13px] font-medium">Add Column</span>
-          </button>
+          {isAddingColumn ? (
+            <form onSubmit={handleAddColumn} className="w-[340px] shrink-0 bg-white dark:bg-[#09090b] border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 shadow-sm h-fit">
+              <input
+                autoFocus
+                type="text"
+                placeholder="Column title..."
+                value={newColumnTitle}
+                onChange={(e) => setNewColumnTitle(e.target.value)}
+                className="w-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-900 dark:focus:ring-white mb-2"
+              />
+              <div className="flex gap-2">
+                <button type="submit" className="px-3 py-1.5 bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 text-xs font-medium rounded-md hover:bg-zinc-800 dark:hover:bg-white">
+                  Save
+                </button>
+                <button type="button" onClick={() => setIsAddingColumn(false)} className="px-3 py-1.5 text-zinc-600 dark:text-zinc-400 text-xs font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          ) : (
+            <button 
+              onClick={() => setIsAddingColumn(true)}
+              className="w-[340px] shrink-0 flex items-center gap-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50 dark:hover:text-zinc-200 px-3 py-2.5 rounded-lg border border-transparent transition-colors mt-0.5"
+            >
+              <Plus className="w-4 h-4 stroke-[2]" />
+              <span className="text-[13px] font-medium">Add Column</span>
+            </button>
+          )}
         </div>
       </div>
 

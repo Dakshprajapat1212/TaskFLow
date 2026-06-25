@@ -22,6 +22,19 @@ const boardSchema = new mongoose.Schema(
         role: { type: String, enum: ['viewer', 'editor'], default: 'viewer' }
       }
     ],
+    columns: {
+      type: [
+        {
+          id: { type: String, required: true },
+          title: { type: String, required: true }
+        }
+      ],
+      default: [
+        { id: 'todo', title: 'To Do' },
+        { id: 'in-progress', title: 'In Progress' },
+        { id: 'done', title: 'Done' }
+      ]
+    }
   },
   {
     timestamps: true,

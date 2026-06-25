@@ -100,6 +100,39 @@ export const useBoardStore = create((set, get) => ({
     }
   },
 
+  addColumn: async (boardId, columnTitle) => {
+    const board = get().boards.find(b => b._id === boardId);
+    if (!board) return;
+    
+    // Create new column object
+    const newColumn = {
+      id: columnTitle.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+      title: columnTitle
+    };
+    
+    const updatedColumns = [...(board.columns || []), newColumn];
+    
+    // Optimistic update
+    set((state) => ({
+      boards: state.boards.map(b => b._id === boardId ? { ...b, columns: updatedColumns } : b)
+    }));
+    
+    try {
+      const res = await api.put(`/boards/${boardId}`, { columns: updatedColumns });
+      set((state) => ({
+        boards: state.boards.map(b => b._id === boardId ? res.data : b)
+      }));
+      return res.data;
+    } catch (error) {
+      // Revert optimistic update
+      set((state) => ({
+        boards: state.boards.map(b => b._id === boardId ? board : b),
+        error: 'Failed to add column'
+      }));
+      throw error;
+    }
+  },
+
   fetchTasks: async (boardId) => {
     set({ isLoading: true, error: null });
     try {

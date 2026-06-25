@@ -23,7 +23,14 @@ const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null }) => {
   const [aiSubtasksSuggestion, setAiSubtasksSuggestion] = useState(null);
   const [selectedAiSubtasks, setSelectedAiSubtasks] = useState([]);
 
-  const { createTask, updateTask, isLoading, error, clearError } = useBoardStore();
+  const { boards, createTask, updateTask, isLoading, error, clearError } = useBoardStore();
+
+  const board = boards.find(b => b._id === boardId);
+  const activeColumns = board?.columns?.length > 0 ? board.columns : [
+    { id: 'todo', title: 'To Do' },
+    { id: 'in-progress', title: 'In Progress' },
+    { id: 'done', title: 'Done' }
+  ];
 
   const resetForm = () => {
     setTitle('');
@@ -299,9 +306,9 @@ const CreateTaskModal = ({ isOpen, onClose, boardId, taskToEdit = null }) => {
                       value={status}
                       onChange={(e) => setStatus(e.target.value)}
                     >
-                      <option value="todo">To Do</option>
-                      <option value="in-progress">In Progress</option>
-                      <option value="done">Done</option>
+                      {activeColumns.map(col => (
+                        <option key={col.id} value={col.id}>{col.title}</option>
+                      ))}
                     </select>
                   </div>
                   <div>
