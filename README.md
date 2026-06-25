@@ -1,94 +1,82 @@
-# TaskFlow - Smart Task & Project Manager
+# TaskFlow 🚀
 
-TaskFlow is a modern, full-stack task and project management application built with the MERN stack (MongoDB, Express, React, Node.js) and integrated with the Google Gemini API for intelligent task estimations.
+TaskFlow is a powerful, AI-assisted Kanban project management tool built with the MERN stack. Designed for maximum productivity, it features a highly dynamic drag-and-drop interface, custom board columns, and intelligent AI integration to automate your workflow.
 
-## Features
-- **User Authentication**: Secure JWT-based login and registration.
-- **Board Management**: Create and manage multiple Kanban boards. Strict ownership enforcement prevents unauthorized access.
-- **Task Management**: Create tasks, assign priorities, set due dates, and track status across "To Do", "In Progress", and "Done" columns.
-- **Subtask Workflow**: Advanced 3-state subtasks (todo, in-progress, done) that automatically derive the parent task's column status.
-- **AI-Powered Estimations**: Request effort and due date suggestions using Google's Gemini AI.
-- **Modern UI**: Built with React and Tailwind CSS, featuring light/dark mode, fully responsive mobile design, and fluid drag-and-drop.
-- **State Management**: Zustand for scalable and lightweight client-side state handling.
+## ✨ Features
 
-## Tech Stack
-### Frontend
-- React 18+
-- Vite
-- Tailwind CSS
-- Zustand
-- React Router DOM
-- dnd-kit (Drag and Drop)
-- Axios
+- **Dynamic Kanban Boards:** Create custom columns (e.g., "Backlog", "In Review", "QA") and seamlessly drag and drop tasks between them.
+- **AI-Powered Assistance (Google Gemini):**
+  - **Natural Language Parsing:** Type "Remind me to fix the login bug tomorrow" to auto-fill task properties.
+  - **Auto-Subtasks:** Generate intelligent subtask checklists based purely on your task title.
+  - **Auto-Estimates:** Get AI-driven time and effort estimations.
+- **Smart Subtask Syncing:** Dragging a parent task to the "Done" column automatically checks off all its subtasks. Dragging it back resets them.
+- **Zero-Latency UI:** Powered by Zustand and Optimistic UI updates, drag-and-drop feels instantaneous (0ms perceived latency).
+- **Secure Authentication:** JWT-based user authentication with encrypted passwords via bcrypt.
+- **Responsive Dark Mode:** Beautiful, modern UI built with Tailwind CSS that respects your system preferences.
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB & Mongoose
-- JSON Web Token (JWT)
-- bcryptjs
-- @google/genai (Gemini AI API)
+## 🛠 Tech Stack
 
-## Getting Started
+- **Frontend:** React 18, Vite, Tailwind CSS, Zustand, React Router, @dnd-kit
+- **Backend:** Node.js, Express.js, Mongoose, Google Gemini API
+- **Database:** MongoDB Atlas
+- **Deployment Strategy:** Vercel (Frontend), Render (Backend), GitHub Actions (Keep-Alive Cron Job)
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js v18+
-- MongoDB instance (local or Atlas)
-- Google Gemini API Key
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine. You will also need a MongoDB Atlas account and a Google Gemini API Key.
 
-### Backend Setup
-1. Navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file based on `.env.example`:
-   ```env
-   PORT=5001
-   MONGO_URI=mongodb://localhost:27017/taskflow
-   JWT_SECRET=your_jwt_secret
-   GEMINI_API_KEY=your_gemini_api_key
-   ```
-4. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/taskflow.git
+cd taskflow
+```
 
-### Frontend Setup
-1. Navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
-   
-The frontend will run on `http://localhost:5173` and communicate with the backend on `http://localhost:5001`.
+### 2. Backend Setup
+```bash
+cd backend
+npm install
+```
 
-## API Documentation
-Please see [API_DOCS.md](./API_DOCS.md) for a full list of available REST API endpoints and authentication requirements.
+Create a `.env` file in the `backend` directory and add the following:
+```env
+PORT=5001
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+GEMINI_API_KEY=your_google_gemini_api_key
+```
 
-## Deployment
+Start the backend development server:
+```bash
+npm run dev
+```
 
-### Backend (Render / Heroku / DigitalOcean)
-1. Ensure your MongoDB Atlas cluster is accessible.
-2. Set the environment variables (`PORT`, `MONGO_URI`, `JWT_SECRET`, `GEMINI_API_KEY`) in your hosting provider's dashboard.
-3. Use the start script provided in `package.json`: `npm start` (which runs `node server.js`).
+### 3. Frontend Setup
+Open a new terminal window:
+```bash
+cd frontend
+npm install
+```
 
-### Frontend (Vercel / Netlify)
-1. The frontend uses Vite. When deploying to a platform like Vercel, set the Framework Preset to Vite.
-2. Build command: `npm run build`
-3. Output directory: `dist`
-4. **Environment Variables**: You MUST provide the backend API URL as an environment variable in your hosting dashboard:
-   ```env
-   VITE_API_URL=https://your-backend-url.com/api
-   ```
-   If `VITE_API_URL` is omitted, the application will default to `http://localhost:5001/api`.
+Create a `.env` file in the `frontend` directory and add the following:
+```env
+VITE_API_URL=http://localhost:5001/api
+```
+
+Start the frontend development server:
+```bash
+npm run dev
+```
+
+## 📖 How to Use TaskFlow
+
+1. **Sign Up / Log In:** Create an account to access your personal workspace.
+2. **Create a Board:** Click "New Project" to start a new board.
+3. **Customize Columns:** Click the "Add Column" button on the far right of your board to create custom workflow stages.
+4. **Create Tasks:** Click "New Issue" to add a task. 
+5. **Use AI:** In the task creation modal, type naturally in the "Ask AI" box, or use the "AI Assistant" sidebar to auto-generate subtasks and estimates.
+6. **Drag and Drop:** Grab anywhere on a task card and effortlessly drag it to a new column. 
+7. **Complete Subtasks:** Clicking a subtask directly from the board will cycle its state. Dragging the parent card to the final "Done" column will complete them all automatically!
+
+---
+*TaskFlow was engineered to showcase modern full-stack development, utilizing decoupled architecture and serverless optimization techniques.*
