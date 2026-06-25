@@ -78,5 +78,32 @@ npm run dev
 6. **Drag and Drop:** Grab anywhere on a task card and effortlessly drag it to a new column. 
 7. **Complete Subtasks:** Clicking a subtask directly from the board will cycle its state. Dragging the parent card to the final "Done" column will complete them all automatically!
 
+## 🔌 API Documentation
+
+| Method | Endpoint | Description | Auth Required |
+|---|---|---|---|
+| POST | `/api/auth/register` | Register a new user | No |
+| POST | `/api/auth/login` | Login and get JWT token | No |
+| GET | `/api/auth/me` | Get current user profile | Yes |
+| GET | `/api/boards` | Get all boards for logged-in user | Yes |
+| POST | `/api/boards` | Create a new board | Yes |
+| PUT | `/api/boards/:id` | Update board (Add Custom Column) | Yes |
+| DELETE | `/api/boards/:id` | Delete a board | Yes |
+| GET | `/api/tasks/board/:boardId` | Get all tasks for a specific board | Yes |
+| POST | `/api/tasks` | Create a new task | Yes |
+| PUT | `/api/tasks/:id` | Update task details / status | Yes |
+| DELETE | `/api/tasks/:id` | Delete a task | Yes |
+| POST | `/api/ai/suggest` | Generate AI task/subtask suggestions | Yes |
+
+## 📸 Screenshots
+*(Add your live screenshots here)*
+- **Login Screen:** `![Login](./screenshots/login.png)`
+- **Dashboard:** `![Dashboard](./screenshots/dashboard.png)`
+- **Board View:** `![Board View](./screenshots/board.png)`
+- **Mobile View:** `![Mobile View](./screenshots/mobile.png)`
+
+## ⚠️ Known Issues / Future Improvements
+- **Real-time Collaboration:** Currently, the app relies on REST API polling. In the future, integrating WebSockets (Socket.io) would allow multiple users to drag-and-drop on the same board simultaneously.
+
 ---
 *TaskFlow was engineered to showcase modern full-stack development, utilizing decoupled architecture and serverless optimization techniques.*
